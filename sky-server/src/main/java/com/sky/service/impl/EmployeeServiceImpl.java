@@ -23,7 +23,7 @@ import org.springframework.util.DigestUtils;
 
 import java.time.LocalDateTime;
 import java.util.List;
-
+//TODO 后期使用mybatisplus进行修改
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
@@ -124,9 +124,34 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .status(status)
                 .id(id)
                 .build();
-
-
         employeeMapper.update(employee);
+    }
+
+    /**
+     * 编辑员工消息
+     * @param employeeDTO
+     */
+    @Override
+    public void modify(EmployeeDTO employeeDTO) {
+        Employee employee = new Employee();
+        //对象属性拷贝
+        BeanUtils.copyProperties(employeeDTO,employee);
+        //设置修改时间和修改人id
+        employee.setUpdateTime(LocalDateTime.now());
+        employee.setUpdateUser(BaseContext.getCurrentId());
+        employeeMapper.update(employee);
+    }
+
+    /**
+     * 根据id查询员工信息
+     * @param id
+     * @return
+     */
+    @Override
+    public Employee getById(Long id) {
+        Employee employee = employeeMapper.getById(id);
+        employee.setPassword("****");
+        return employee;
     }
 
 

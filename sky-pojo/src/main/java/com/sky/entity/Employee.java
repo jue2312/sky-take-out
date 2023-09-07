@@ -8,9 +8,9 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-
+//TODO 后期使用mybatisplus进行修改
 @Data
-    @Builder
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Employee implements Serializable {
