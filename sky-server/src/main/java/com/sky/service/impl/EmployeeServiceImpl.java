@@ -81,12 +81,14 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setPassword(DigestUtils.md5DigestAsHex(PasswordConstant.DEFAULT_PASSWORD.getBytes()));
         //设置状态 默认正常状态 1：启用 2：禁用
         employee.setStatus(StatusConstant.ENABLE);
-        //设置创建时间和更新时间
-        employee.setCreateTime(LocalDateTime.now());
-        employee.setUpdateTime(LocalDateTime.now());
-        //设置设置创建人id和修改人id
-        employee.setCreateUser(BaseContext.getCurrentId());
-        employee.setUpdateUser(BaseContext.getCurrentId());
+        //公共属性已增强
+        {//设置创建时间和更新时间
+            //employee.setCreateTime(LocalDateTime.now());
+            //employee.setUpdateTime(LocalDateTime.now());
+            //设置设置创建人id和修改人id
+            //employee.setCreateUser(BaseContext.getCurrentId());
+            //employee.setUpdateUser(BaseContext.getCurrentId());
+        }
         employeeMapper.insert(employee);
     }
 
@@ -137,8 +139,11 @@ public class EmployeeServiceImpl implements EmployeeService {
         //对象属性拷贝
         BeanUtils.copyProperties(employeeDTO,employee);
         //设置修改时间和修改人id
-        employee.setUpdateTime(LocalDateTime.now());
-        employee.setUpdateUser(BaseContext.getCurrentId());
+        //公共属性已增强
+        { //employee.setUpdateTime(LocalDateTime.now());
+            //employee.setUpdateUser(BaseContext.getCurrentId());
+        }
+
         employeeMapper.update(employee);
     }
 
